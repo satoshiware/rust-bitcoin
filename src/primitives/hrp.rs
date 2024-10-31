@@ -43,7 +43,7 @@ macro_rules! define_hrp_const {
 }
 define_hrp_const! {
     /// The human-readable part used by the Bitcoin mainnet network.
-    pub const BC 2 [98, 99, 0, 0];
+    pub const AZ 2 [97, 122, 0, 0];
 }
 define_hrp_const! {
     /// The human-readable part used by the Bitcoin testnet networks (testnet, signet).
@@ -193,7 +193,7 @@ impl Hrp {
 
     /// Returns `true` if this hrpstring is valid on the Bitcoin network i.e., HRP is "bc".
     #[inline]
-    pub fn is_valid_on_mainnet(&self) -> bool { *self == self::BC }
+    pub fn is_valid_on_mainnet(&self) -> bool { *self == self::AZ }
 
     /// Returns `true` if this hrpstring is valid on the Bitcoin testnet network i.e., HRP is "tb".
     #[inline]
@@ -507,8 +507,8 @@ mod tests {
     #[cfg(feature = "alloc")]
     #[test]
     fn hrp_consts() {
-        use crate::primitives::hrp::{BC, BCRT, TB};
-        assert_eq!(BC, Hrp::parse_unchecked("bc"));
+        use crate::primitives::hrp::{AZ, BCRT, TB};
+        assert_eq!(AZ, Hrp::parse_unchecked("az"));
         assert_eq!(TB, Hrp::parse_unchecked("tb"));
         assert_eq!(BCRT, Hrp::parse_unchecked("bcrt"));
     }

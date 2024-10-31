@@ -3,7 +3,7 @@
 #[doc(inline)]
 pub use crate::primitives::hrp::Hrp;
 #[doc(inline)]
-pub use crate::primitives::hrp::BC;
+pub use crate::primitives::hrp::AZ;
 #[doc(inline)]
 pub use crate::primitives::hrp::BCRT;
 #[doc(inline)]
