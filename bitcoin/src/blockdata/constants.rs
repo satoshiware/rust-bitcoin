@@ -25,15 +25,15 @@ use crate::pow::CompactTarget;
 use crate::Amount;
 
 /// How many seconds between blocks we expect on average.
-pub const TARGET_BLOCK_SPACING: u32 = 600;
+pub const TARGET_BLOCK_SPACING: u32 = 120;
 /// How many blocks between diffchanges.
-pub const DIFFCHANGE_INTERVAL: u32 = 2016;
+pub const DIFFCHANGE_INTERVAL: u32 = 1440;
 /// How much time on average should occur between diffchanges.
-pub const DIFFCHANGE_TIMESPAN: u32 = 14 * 24 * 3600;
+pub const DIFFCHANGE_TIMESPAN: u32 = 2 * 24 * 3600;
 
 #[deprecated(since = "0.31.0", note = "Use Weight::MAX_BLOCK instead")]
 /// The maximum allowed weight for a block, see BIP 141 (network rule).
-pub const MAX_BLOCK_WEIGHT: u32 = 4_000_000;
+pub const MAX_BLOCK_WEIGHT: u32 = 100_000;
 
 #[deprecated(since = "0.31.0", note = "Use Weight::MIN_TRANSACTION instead")]
 /// The minimum transaction weight for a valid serialized transaction.
@@ -54,7 +54,7 @@ pub const SCRIPT_ADDRESS_PREFIX_TEST: u8 = 196; // 0xc4
 /// The maximum allowed script size.
 pub const MAX_SCRIPT_ELEMENT_SIZE: usize = 520;
 /// How may blocks between halvings.
-pub const SUBSIDY_HALVING_INTERVAL: u32 = 210_000;
+pub const SUBSIDY_HALVING_INTERVAL: u32 = 262_800;
 /// Maximum allowed value for an integer in Script.
 pub const MAX_SCRIPTNUM_VALUE: u32 = 0x80000000; // 2^31
 /// Number of blocks needed for an output from a coinbase transaction to be spendable.
@@ -74,7 +74,7 @@ fn bitcoin_genesis_tx() -> Transaction {
     let in_script = script::Builder::new()
         .push_int(486604799)
         .push_int_non_minimal(4)
-        .push_slice(b"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks")
+        .push_slice(b"BTC BLK: 0000000000000000000021bb823d8518bfa49c6f16bce1545c4977eb829238a9 TXID: b5f53d64...")
         .into_script();
     ret.input.push(TxIn {
         previous_output: OutPoint::null(),
@@ -87,7 +87,7 @@ fn bitcoin_genesis_tx() -> Transaction {
     let script_bytes = hex!("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f");
     let out_script =
         script::Builder::new().push_slice(script_bytes).push_opcode(OP_CHECKSIG).into_script();
-    ret.output.push(TxOut { value: Amount::from_sat(50 * 100_000_000), script_pubkey: out_script });
+    ret.output.push(TxOut { value: Amount::from_sat(15 * 100_000_000), script_pubkey: out_script });
 
     // end
     ret
@@ -104,9 +104,9 @@ pub fn genesis_block(network: Network) -> Block {
                 version: block::Version::ONE,
                 prev_blockhash: Hash::all_zeros(),
                 merkle_root,
-                time: 1231006505,
+                time: 1676412978,
                 bits: CompactTarget::from_consensus(0x1d00ffff),
-                nonce: 2083236893,
+                nonce: 1429287480,
             },
             txdata,
         },
@@ -156,8 +156,8 @@ impl ChainHash {
     // Mainnet value can be verified at https://github.com/lightning/bolts/blob/master/00-introduction.md
     /// `ChainHash` for mainnet bitcoin.
     pub const BITCOIN: Self = Self([
-        111, 226, 140, 10, 182, 241, 179, 114, 193, 166, 162, 70, 174, 99, 247, 79, 147, 30, 131,
-        101, 225, 90, 8, 156, 104, 214, 25, 0, 0, 0, 0, 0,
+        148, 174, 193, 237, 86, 130, 176, 33, 98, 44, 6, 183, 180, 67, 55, 0, 188, 172, 187, 20, 35,
+        106, 152, 15, 13, 244, 15, 176, 0, 0, 0, 0
     ]);
     /// `ChainHash` for testnet bitcoin.
     pub const TESTNET: Self = Self([

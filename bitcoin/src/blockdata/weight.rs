@@ -35,7 +35,7 @@ impl Weight {
     pub const WITNESS_SCALE_FACTOR: u64 = crate::blockdata::constants::WITNESS_SCALE_FACTOR as u64;
 
     /// The maximum allowed weight for a block, see BIP 141 (network rule).
-    pub const MAX_BLOCK: Weight = Weight(4_000_000);
+    pub const MAX_BLOCK: Weight = Weight(100_000);
 
     /// The minimum transaction weight for a valid serialized transaction.
     pub const MIN_TRANSACTION: Weight = Weight(Self::WITNESS_SCALE_FACTOR * 60);
