@@ -74,7 +74,7 @@ fn bitcoin_genesis_tx() -> Transaction {
     let in_script = script::Builder::new()
         .push_int(486604799)
         .push_int_non_minimal(4)
-        .push_slice(b"BTC BLK: 0000000000000000000021bb823d8518bfa49c6f16bce1545c4977eb829238a TXID: b5f53d64...")
+        .push_slice(b"BTC BLK: 0000000000000000000021bb823d8518bfa49c6f16bce1545c4977eb829238a9 TXID: b5f53d64...")
         .into_script();
     ret.input.push(TxIn {
         previous_output: OutPoint::null(),
